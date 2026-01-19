@@ -1,0 +1,36 @@
+name: infrapipeline
+trigger: none
+pool:
+ name: '1901agent'
+
+stages:
+  - stage: initplanapply
+    jobs:
+      - job: init
+        displayName: init
+        steps:
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'init'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+            commandOptions: '-reconfigure'
+            backendServiceArm: '1701service_connection'
+            backendAzureRmOverrideSubscriptionID: 'cb0d4d41-c138-403e-a809-9f49c32a3b51'
+            backendAzureRmResourceGroupName: 'azadrg'
+            backendAzureRmStorageAccountName: 'azadstgs'
+            backendAzureRmContainerName: 'azadcontainer'
+            backendAzureRmKey: 'update.terraform.tfstate'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'plan'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+            environmentServiceNameAzureRM: '1701service_connection'
+        - task: TerraformTask@5
+          inputs:
+            provider: 'azurerm'
+            command: 'apply'
+            workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+            commandOptions: '--auto-approve'
+            environmentServiceNameAzureRM: '1701service_connection'
