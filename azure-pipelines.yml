@@ -1,7 +1,7 @@
 name: infrapipeline
 trigger: none
 pool:
- name: '1901agent'
+ name: '1901'
 
 stages:
   - stage: initplanapply
