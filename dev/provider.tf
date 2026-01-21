@@ -9,7 +9,7 @@ terraform {
     resource_group_name  = "azadrg"
     storage_account_name = "azadstgs"
     container_name       = "azadcontainer"
-    key                  = "update.terraform.tfstate"
+    key                  = "dev.tfstate"
   }
 
 }
