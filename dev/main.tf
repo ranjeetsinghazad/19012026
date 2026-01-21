@@ -19,11 +19,6 @@ module "subnet" {
   subnet5    = var.subnet5
 }
 
-module "pip" {
-  depends_on = [module.subnet]
-  source     = "../module/azurerm_pip_4"
-  PIP5       = var.PIP5
-}
 module "vm" {
   depends_on = [module.subnet, module.pip]
   source     = "../module/virtual_matchine_05"
