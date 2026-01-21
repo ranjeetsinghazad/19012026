@@ -20,7 +20,7 @@ stages:
             backendAzureRmResourceGroupName: 'azadrg'
             backendAzureRmStorageAccountName: 'azadstgs'
             backendAzureRmContainerName: 'azadcontainer'
-            backendAzureRmKey: 'update.terraform.tfstate'
+            backendAzureRmKey: 'latest.tfstate'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
