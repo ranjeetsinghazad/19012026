@@ -1,7 +1,7 @@
 name: infrapipeline
 trigger: none
 pool:
- name: 
+ name: '1901'
 
 stages:
   - stage: initplanapply
@@ -15,7 +15,7 @@ stages:
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
             commandOptions: '-reconfigure'
-            backendServiceArm: '1701service_connection'
+            backendServiceArm: '2101serviceconnection'
             backendAzureRmOverrideSubscriptionID: 'cb0d4d41-c138-403e-a809-9f49c32a3b51'
             backendAzureRmResourceGroupName: 'azadrg'
             backendAzureRmStorageAccountName: 'azadstgs'
@@ -26,11 +26,11 @@ stages:
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
-            environmentServiceNameAzureRM: '1701service_connection'
+            environmentServiceNameAzureRM: '2101serviceconnection'
         - task: TerraformTask@5
           inputs:
             provider: 'azurerm'
             command: 'apply'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
             commandOptions: '--auto-approve'
-            environmentServiceNameAzureRM: '1701service_connection'
+            environmentServiceNameAzureRM: '2101serviceconnection'
