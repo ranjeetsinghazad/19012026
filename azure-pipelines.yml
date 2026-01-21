@@ -10,25 +10,24 @@ stages:
         displayName: init
         steps:
         - task: TerraformTask@5
-          inputs:
+          inputs: 
             provider: 'azurerm'
             command: 'init'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
-            commandOptions: '-reconfigure'
             backendServiceArm: '2101serviceconnection'
             backendAzureRmOverrideSubscriptionID: 'cb0d4d41-c138-403e-a809-9f49c32a3b51'
             backendAzureRmResourceGroupName: 'azadrg'
             backendAzureRmStorageAccountName: 'azadstgs'
             backendAzureRmContainerName: 'azadcontainer'
-            backendAzureRmKey: 'update.terraform.tfstate'
+            backendAzureRmKey: 'dev.tfstate'
         - task: TerraformTask@5
-          inputs:
+          inputs: 
             provider: 'azurerm'
             command: 'plan'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
             environmentServiceNameAzureRM: '2101serviceconnection'
         - task: TerraformTask@5
-          inputs:
+          inputs: 
             provider: 'azurerm'
             command: 'apply'
             workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
